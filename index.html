@@ -42,55 +42,84 @@
           <label for="summary">Profile Summary:</label>
           <textarea id="summary" name="summary" rows="4" placeholder="Brief summary about yourself"></textarea>
         </div>
-        <fieldset>
-          <legend>Education</legend>
-          <div class="education-row">
-            <input type="text" name="degree" placeholder="Degree">
-            <input type="text" name="school" placeholder="School">
-            <input type="text" name="year" placeholder="Year">
-            <input type="text" name="gpa" placeholder="GPA (optional)">
-            <button type="button" class="remove-education">Remove</button>
+        
+        <!-- Education Section -->
+        <div class="collapsible-section">
+          <div class="section-header" data-section="education">
+            <span class="dropdown-arrow">▶</span>
+            <span class="section-title">Education</span>
           </div>
-          <button type="button" id="add-education">Add Row</button>
-        </fieldset>
-        <fieldset>
-          <legend>Skills</legend>
-          <div class="skills-rows" id="skills-rows">
-            <div class="skill-row">
-              <input type="text" name="skill" placeholder="Enter a skill">
-              <button type="button" class="remove-skill-row">Remove</button>
+          <div class="section-content" id="education-content">
+            <div class="education-row">
+              <input type="text" name="degree" placeholder="Degree">
+              <input type="text" name="school" placeholder="School">
+              <input type="text" name="year" placeholder="Year">
+              <input type="text" name="gpa" placeholder="GPA (optional)">
+              <button type="button" class="remove-education">Remove</button>
             </div>
+            <button type="button" id="add-education">Add Row</button>
           </div>
-          <button type="button" id="add-skill">Add Skill</button>
-        </fieldset>
-        <fieldset>
-          <legend>Languages</legend>
-          <div class="languages-rows" id="languages-rows">
-            <div class="language-row">
-              <input type="text" name="language" placeholder="Language">
-              <select name="proficiency">
-                <option value="">Select Proficiency</option>
-                <option value="Basics">Basics</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Fluent">Fluent</option>
-                <option value="Native">Native</option>
-              </select>
-              <button type="button" class="remove-language">Remove</button>
+        </div>
+        
+        <!-- Skills Section -->
+        <div class="collapsible-section">
+          <div class="section-header" data-section="skills">
+            <span class="dropdown-arrow">▶</span>
+            <span class="section-title">Skills</span>
+          </div>
+          <div class="section-content" id="skills-content">
+            <div class="skills-rows" id="skills-rows">
+              <div class="skill-row">
+                <input type="text" name="skill" placeholder="Enter a skill">
+                <button type="button" class="remove-skill-row">Remove</button>
+              </div>
             </div>
+            <button type="button" id="add-skill">Add Skill</button>
           </div>
-          <button type="button" id="add-language">Add Language</button>
-        </fieldset>
-        <fieldset>
-          <legend>Experience</legend>
-          <div class="experience-row">
-            <input type="text" name="company" placeholder="Company">
-            <input type="text" name="role" placeholder="Role">
-            <input type="text" name="duration" placeholder="Duration">
-            <textarea name="achievements" rows="3" placeholder="List your achievements (one per line)"></textarea>
-            <button type="button" class="remove-experience">Remove</button>
+        </div>
+        
+        <!-- Languages Section -->
+        <div class="collapsible-section">
+          <div class="section-header" data-section="languages">
+            <span class="dropdown-arrow">▶</span>
+            <span class="section-title">Languages</span>
           </div>
-          <button type="button" id="add-experience">Add Row</button>
-        </fieldset>
+          <div class="section-content" id="languages-content">
+            <div class="languages-rows" id="languages-rows">
+              <div class="language-row">
+                <input type="text" name="language" placeholder="Language">
+                <select name="proficiency">
+                  <option value="">Select Proficiency</option>
+                  <option value="Basics">Basics</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Fluent">Fluent</option>
+                  <option value="Native">Native</option>
+                </select>
+                <button type="button" class="remove-language">Remove</button>
+              </div>
+            </div>
+            <button type="button" id="add-language">Add Language</button>
+          </div>
+        </div>
+        
+        <!-- Experience Section -->
+        <div class="collapsible-section">
+          <div class="section-header" data-section="experience">
+            <span class="dropdown-arrow">▶</span>
+            <span class="section-title">Experience</span>
+          </div>
+          <div class="section-content" id="experience-content">
+            <div class="experience-row">
+              <input type="text" name="company" placeholder="Company">
+              <input type="text" name="role" placeholder="Role">
+              <input type="text" name="duration" placeholder="Duration">
+              <textarea name="achievements" rows="3" placeholder="List your achievements (one per line)"></textarea>
+              <button type="button" class="remove-experience">Remove</button>
+            </div>
+            <button type="button" id="add-experience">Add Row</button>
+          </div>
+        </div>
+        
         <button type="button" id="clear-form">Clear Form</button>
       </form>
     </section>

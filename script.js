@@ -1,4 +1,35 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // === COLLAPSIBLE SECTIONS FUNCTIONALITY ===
+  function initializeCollapsibleSections() {
+    const sectionHeaders = document.querySelectorAll('.section-header');
+    
+    // Initially collapse all sections
+    document.querySelectorAll('.section-content').forEach(content => {
+      content.classList.add('collapsed');
+    });
+    
+    sectionHeaders.forEach(header => {
+      header.addEventListener('click', function() {
+        const sectionName = this.getAttribute('data-section');
+        const content = document.getElementById(sectionName + '-content');
+        const arrow = this.querySelector('.dropdown-arrow');
+        
+        // Toggle the section
+        if (content.classList.contains('expanded')) {
+          // Collapse
+          content.classList.remove('expanded');
+          content.classList.add('collapsed');
+          this.classList.remove('active');
+        } else {
+          // Expand
+          content.classList.remove('collapsed');
+          content.classList.add('expanded');
+          this.classList.add('active');
+        }
+      });
+    });
+  }
+
   // Map form fields to preview elements
   const fieldMap = [
     { input: 'name', preview: 'preview-name' },
@@ -35,9 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // === EDUCATION SECTION ===
-  const educationFieldset = document.querySelector('fieldset legend').textContent.includes('Education') 
-    ? document.querySelector('fieldset') 
-    : Array.from(document.querySelectorAll('fieldset')).find(fs => fs.querySelector('legend').textContent.includes('Education'));
+  const educationContainer = document.getElementById('education-content');
   const educationList = document.querySelector('.education-list');
   const addEducationBtn = document.getElementById('add-education');
 
@@ -104,8 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // === SKILLS SECTION ===
-  const skillsFieldset = Array.from(document.querySelectorAll('fieldset')).find(fs => 
-    fs.querySelector('legend').textContent.includes('Skills'));
+  const skillsContainer = document.getElementById('skills-content');
   const skillsList = document.querySelector('.skills-list');
   const addSkillBtn = document.getElementById('add-skill');
 
@@ -148,8 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // === LANGUAGES SECTION ===
-  const languagesFieldset = Array.from(document.querySelectorAll('fieldset')).find(fs => 
-    fs.querySelector('legend').textContent.includes('Languages'));
+  const languagesContainer = document.getElementById('languages-content');
   const languagesList = document.querySelector('.languages-list');
   const addLanguageBtn = document.getElementById('add-language');
 
@@ -205,8 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // === EXPERIENCE SECTION ===
-  const experienceFieldset = Array.from(document.querySelectorAll('fieldset')).find(fs => 
-    fs.querySelector('legend').textContent.includes('Experience'));
+  const experienceContainer = document.getElementById('experience-content');
   const experienceList = document.querySelector('.experience-list');
   const addExperienceBtn = document.getElementById('add-experience');
 
@@ -318,11 +344,11 @@ document.addEventListener('DOMContentLoaded', function () {
   // === EVENT LISTENERS FOR DYNAMIC ROWS ===
   
   // Education
-  if (addEducationBtn && educationFieldset) {
+  if (addEducationBtn && educationContainer) {
     addEducationBtn.addEventListener('click', function () {
       const newRow = createEducationRow();
       newRow.classList.add('fade-in-up');
-      educationFieldset.insertBefore(newRow, addEducationBtn);
+      educationContainer.insertBefore(newRow, addEducationBtn);
       
       newRow.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', updateEducationPreview);
@@ -351,11 +377,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Skills
-  if (addSkillBtn && skillsFieldset) {
+  if (addSkillBtn && skillsContainer) {
     addSkillBtn.addEventListener('click', function () {
       const newRow = createSkillRow();
       newRow.classList.add('fade-in-up');
-      skillsFieldset.insertBefore(newRow, addSkillBtn);
+      skillsContainer.insertBefore(newRow, addSkillBtn);
       
       newRow.querySelector('input').addEventListener('input', updateSkillsPreview);
       
@@ -382,11 +408,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Languages
-  if (addLanguageBtn && languagesFieldset) {
+  if (addLanguageBtn && languagesContainer) {
     addLanguageBtn.addEventListener('click', function () {
       const newRow = createLanguageRow();
       newRow.classList.add('fade-in-up');
-      languagesFieldset.insertBefore(newRow, addLanguageBtn);
+      languagesContainer.insertBefore(newRow, addLanguageBtn);
       
       newRow.querySelector('input').addEventListener('input', updateLanguagesPreview);
       newRow.querySelector('select').addEventListener('change', updateLanguagesPreview);
@@ -418,11 +444,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Experience
-  if (addExperienceBtn && experienceFieldset) {
+  if (addExperienceBtn && experienceContainer) {
     addExperienceBtn.addEventListener('click', function () {
       const newRow = createExperienceRow();
       newRow.classList.add('fade-in-up');
-      experienceFieldset.insertBefore(newRow, addExperienceBtn);
+      experienceContainer.insertBefore(newRow, addExperienceBtn);
       
       newRow.querySelectorAll('input, textarea').forEach(input => {
         input.addEventListener('input', updateExperiencePreview);
@@ -602,6 +628,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // === INITIALIZE EVERYTHING ===
+  initializeCollapsibleSections();
   updateProgressBar();
   
   // Add input event listeners to existing rows

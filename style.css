@@ -139,27 +139,71 @@ textarea {
   font-family: inherit;
 }
 
-/* ===== FIELDSETS ===== */
-fieldset {
-  border: none;
-  margin: 0;
-  padding: var(--space-lg);
+/* ===== COLLAPSIBLE SECTIONS ===== */
+.collapsible-section {
   margin-bottom: var(--space-lg);
   background: var(--bg-gray);
   border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
 }
 
-fieldset legend {
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-white);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.section-header:hover {
+  background: var(--bg-light);
+}
+
+.section-header.active {
+  background: var(--bg-light);
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  color: var(--accent);
+  transition: transform 0.3s ease;
+  font-weight: bold;
+}
+
+.section-header.active .dropdown-arrow {
+  transform: rotate(90deg);
+}
+
+.section-title {
   font-weight: 700;
   color: var(--accent);
-  margin-bottom: var(--space-md);
   font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background: var(--bg-white);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-sm);
-  border: 2px solid var(--accent);
+  flex: 1;
+}
+
+.section-content {
+  padding: var(--space-lg);
+  background: var(--bg-gray);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.section-content.expanded {
+  max-height: 1000px;
+  padding: var(--space-lg);
+}
+
+.section-content.collapsed {
+  max-height: 0;
+  padding: 0 var(--space-lg);
 }
 
 /* ===== EDUCATION & EXPERIENCE ROWS ===== */
@@ -789,6 +833,27 @@ button:hover,
     border-radius: var(--radius-md);
   }
   
+  .section-header {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+  
+  .section-content.expanded {
+    padding: var(--space-md);
+  }
+  
+  .section-content.collapsed {
+    padding: 0 var(--space-md);
+  }
+  
+  .section-title {
+    font-size: 1rem;
+  }
+  
+  .dropdown-arrow {
+    font-size: 0.7rem;
+  }
+  
   .resume-preview {
     padding: var(--space-lg) var(--space-md);
   }
@@ -805,7 +870,7 @@ button:hover,
   input[type="email"], 
   input[type="tel"], 
   textarea, 
-  #add-skill-input {
+  select {
     padding: var(--space-sm);
     font-size: 0.95rem;
   }
