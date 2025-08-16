@@ -29,7 +29,19 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // --- Education dynamic rows ---
-  const educationFieldset = document.querySelector('fieldset:has(legend:contains("Education"))') || document.querySelector('fieldset');
+  // Find education fieldset by checking legend text content
+  let educationFieldset = null;
+  const allFieldsets = document.querySelectorAll('fieldset');
+  for (const fieldset of allFieldsets) {
+    const legend = fieldset.querySelector('legend');
+    if (legend && legend.textContent.includes('Education')) {
+      educationFieldset = fieldset;
+      break;
+    }
+  }
+  // Fallback to first fieldset if not found
+  educationFieldset = educationFieldset || document.querySelector('fieldset');
+  
   const educationList = document.querySelector('.education-list');
   const addEducationBtn = document.getElementById('add-education');
 
@@ -56,7 +68,19 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // --- Experience dynamic rows ---
-  const experienceFieldset = document.querySelector('fieldset:has(legend:contains("Experience"))') || document.querySelectorAll('fieldset')[2];
+  // Find experience fieldset by checking legend text content
+  let experienceFieldset = null;
+  const allFieldsetsForExp = document.querySelectorAll('fieldset');
+  for (const fieldset of allFieldsetsForExp) {
+    const legend = fieldset.querySelector('legend');
+    if (legend && legend.textContent.includes('Experience')) {
+      experienceFieldset = fieldset;
+      break;
+    }
+  }
+  // Fallback to third fieldset if not found (assuming Skills is second)
+  experienceFieldset = experienceFieldset || document.querySelectorAll('fieldset')[2];
+  
   const experienceList = document.querySelector('.experience-list');
   const addExperienceBtn = document.getElementById('add-experience');
 
