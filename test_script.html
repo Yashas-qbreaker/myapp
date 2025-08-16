@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder Test Suite</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-results { background: #f0f0f0; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .test-pass { color: green; }
+        .test-fail { color: red; }
+        .test-item { margin: 10px 0; padding: 5px; border-left: 3px solid #ccc; padding-left: 10px; }
+        .test-item.pass { border-left-color: green; }
+        .test-item.fail { border-left-color: red; }
+        iframe { width: 100%; height: 600px; border: 1px solid #ccc; margin: 20px 0; }
+        button { padding: 10px 20px; margin: 5px; background: #007cba; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #005a87; }
+        .log { background: #333; color: #0f0; padding: 10px; font-family: monospace; font-size: 12px; max-height: 200px; overflow-y: auto; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Interactive Resume Builder - Test Suite</h1>
+    
+    <div class="test-controls">
+        <button onclick="runAllTests()">Run All Tests</button>
+        <button onclick="clearResults()">Clear Results</button>
+        <button onclick="reloadFrame()">Reload Frame</button>
+    </div>
+
+    <div id="log" class="log"></div>
+    
+    <iframe id="testFrame" src="index.html"></iframe>
+    
+    <div id="testResults" class="test-results">
+        <h2>Test Results</h2>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        let testFrame;
+        let testDoc;
+        let testResults = [];
+        
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${timestamp}] ${message}\n`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function addTestResult(test, passed, message) {
+            testResults.push({ test, passed, message });
+            const resultsDiv = document.getElementById('results');
+            const testItem = document.createElement('div');
+            testItem.className = `test-item ${passed ? 'pass' : 'fail'}`;
+            testItem.innerHTML = `
+                <strong>${test}:</strong> 
+                <span class="${passed ? 'test-pass' : 'test-fail'}">
+                    ${passed ? 'PASS' : 'FAIL'}
+                </span>
+                ${message ? ` - ${message}` : ''}
+            `;
+            resultsDiv.appendChild(testItem);
+        }
+        
+        function clearResults() {
+            testResults = [];
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('log').innerHTML = '';
+        }
+        
+        function reloadFrame() {
+            document.getElementById('testFrame').src = 'index.html';
+            setTimeout(() => {
+                initTestFramework();
+            }, 1000);
+        }
+        
+        function initTestFramework() {
+            testFrame = document.getElementById('testFrame');
+            testDoc = testFrame.contentDocument || testFrame.contentWindow.document;
+            log('Test framework initialized');
+        }
+        
+        // Test Functions
+        function testBasicElements() {
+            log('Testing basic elements...');
+            
+            // Test if main elements exist
+            const elements = [
+                { selector: '#resume-form', name: 'Resume Form' },
+                { selector: '#name', name: 'Name Input' },
+                { selector: '#email', name: 'Email Input' },
+                { selector: '#phone', name: 'Phone Input' },
+                { selector: '#summary', name: 'Summary Textarea' },
+                { selector: '.resume-preview', name: 'Resume Preview' },
+                { selector: '#progress-bar', name: 'Progress Bar' },
+                { selector: '#download-pdf', name: 'Download PDF Button' },
+                { selector: '#clear-form', name: 'Clear Form Button' }
+            ];
+            
+            elements.forEach(({ selector, name }) => {
+                const element = testDoc.querySelector(selector);
+                addTestResult(
+                    `Element Check: ${name}`,
+                    !!element,
+                    element ? `Found at ${selector}` : `Missing: ${selector}`
+                );
+            });
+        }
+        
+        function testFormInputs() {
+            log('Testing form inputs...');
+            
+            // Test name input
+            const nameInput = testDoc.querySelector('#name');
+            const namePreview = testDoc.querySelector('.preview-name');
+            
+            if (nameInput && namePreview) {
+                const testName = 'John Doe';
+                nameInput.value = testName;
+                nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                setTimeout(() => {
+                    const previewText = namePreview.textContent;
+                    addTestResult(
+                        'Name Input → Preview',
+                        previewText === testName,
+                        `Expected: "${testName}", Got: "${previewText}"`
+                    );
+                }, 100);
+            }
+            
+            // Test email input
+            const emailInput = testDoc.querySelector('#email');
+            const emailPreview = testDoc.querySelector('.preview-email');
+            
+            if (emailInput && emailPreview) {
+                const testEmail = 'john.doe@example.com';
+                emailInput.value = testEmail;
+                emailInput.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                setTimeout(() => {
+                    const previewText = emailPreview.textContent;
+                    addTestResult(
+                        'Email Input → Preview',
+                        previewText === testEmail,
+                        `Expected: "${testEmail}", Got: "${previewText}"`
+                    );
+                }, 100);
+            }
+            
+            // Test phone input
+            const phoneInput = testDoc.querySelector('#phone');
+            const phonePreview = testDoc.querySelector('.preview-phone');
+            
+            if (phoneInput && phonePreview) {
+                const testPhone = '+1 (555) 999-8888';
+                phoneInput.value = testPhone;
+                phoneInput.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                setTimeout(() => {
+                    const previewText = phonePreview.textContent;
+                    addTestResult(
+                        'Phone Input → Preview',
+                        previewText === testPhone,
+                        `Expected: "${testPhone}", Got: "${previewText}"`
+                    );
+                }, 100);
+            }
+            
+            // Test summary input
+            const summaryInput = testDoc.querySelector('#summary');
+            const summaryPreview = testDoc.querySelector('.preview-summary-text');
+            
+            if (summaryInput && summaryPreview) {
+                const testSummary = 'This is a test summary for the resume.';
+                summaryInput.value = testSummary;
+                summaryInput.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                setTimeout(() => {
+                    const previewText = summaryPreview.textContent;
+                    addTestResult(
+                        'Summary Input → Preview',
+                        previewText === testSummary,
+                        `Expected: "${testSummary}", Got: "${previewText}"`
+                    );
+                }, 100);
+            }
+        }
+        
+        function testEducationSection() {
+            log('Testing education section...');
+            
+            const addEducationBtn = testDoc.querySelector('#add-education');
+            const educationRows = testDoc.querySelectorAll('.education-row');
+            const initialRowCount = educationRows.length;
+            
+            // Test adding education row
+            if (addEducationBtn) {
+                addEducationBtn.click();
+                
+                setTimeout(() => {
+                    const newRowCount = testDoc.querySelectorAll('.education-row').length;
+                    addTestResult(
+                        'Add Education Row',
+                        newRowCount === initialRowCount + 1,
+                        `Initial: ${initialRowCount}, After click: ${newRowCount}`
+                    );
+                    
+                    // Test removing education row
+                    const removeBtn = testDoc.querySelector('.education-row:last-child .remove-education');
+                    if (removeBtn) {
+                        removeBtn.click();
+                        
+                        setTimeout(() => {
+                            const finalRowCount = testDoc.querySelectorAll('.education-row').length;
+                            addTestResult(
+                                'Remove Education Row',
+                                finalRowCount === initialRowCount,
+                                `After removal: ${finalRowCount}, Expected: ${initialRowCount}`
+                            );
+                        }, 600); // Wait for animation
+                    }
+                }, 100);
+            }
+        }
+        
+        function testExperienceSection() {
+            log('Testing experience section...');
+            
+            const addExperienceBtn = testDoc.querySelector('#add-experience');
+            const experienceRows = testDoc.querySelectorAll('.experience-row');
+            const initialRowCount = experienceRows.length;
+            
+            // Test adding experience row
+            if (addExperienceBtn) {
+                addExperienceBtn.click();
+                
+                setTimeout(() => {
+                    const newRowCount = testDoc.querySelectorAll('.experience-row').length;
+                    addTestResult(
+                        'Add Experience Row',
+                        newRowCount === initialRowCount + 1,
+                        `Initial: ${initialRowCount}, After click: ${newRowCount}`
+                    );
+                    
+                    // Test removing experience row
+                    const removeBtn = testDoc.querySelector('.experience-row:last-child .remove-experience');
+                    if (removeBtn) {
+                        removeBtn.click();
+                        
+                        setTimeout(() => {
+                            const finalRowCount = testDoc.querySelectorAll('.experience-row').length;
+                            addTestResult(
+                                'Remove Experience Row',
+                                finalRowCount === initialRowCount,
+                                `After removal: ${finalRowCount}, Expected: ${initialRowCount}`
+                            );
+                        }, 600); // Wait for animation
+                    }
+                }, 100);
+            }
+        }
+        
+        function testSkillsSection() {
+            log('Testing skills section...');
+            
+            const skillsContainer = testDoc.querySelector('#skills-tags');
+            const addSkillInput = testDoc.querySelector('#add-skill-input');
+            
+            if (skillsContainer && addSkillInput) {
+                const initialSkillCount = skillsContainer.querySelectorAll('.skill-tag').length;
+                
+                // Test adding a new skill
+                const testSkill = 'React';
+                addSkillInput.value = testSkill;
+                addSkillInput.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+                
+                setTimeout(() => {
+                    const newSkillCount = skillsContainer.querySelectorAll('.skill-tag').length;
+                    const skillAdded = Array.from(skillsContainer.querySelectorAll('.skill-tag'))
+                        .some(tag => tag.dataset.skill === testSkill);
+                    
+                    addTestResult(
+                        'Add New Skill',
+                        skillAdded && newSkillCount === initialSkillCount + 1,
+                        `Skill "${testSkill}" added: ${skillAdded}, Count: ${newSkillCount}`
+                    );
+                    
+                    // Test skill selection
+                    const skillTags = skillsContainer.querySelectorAll('.skill-tag');
+                    if (skillTags.length > 0) {
+                        const firstTag = skillTags[0];
+                        const wasSelected = firstTag.classList.contains('selected');
+                        firstTag.click();
+                        
+                        setTimeout(() => {
+                            const isSelected = firstTag.classList.contains('selected');
+                            addTestResult(
+                                'Skill Toggle Selection',
+                                isSelected !== wasSelected,
+                                `Selection toggled from ${wasSelected} to ${isSelected}`
+                            );
+                        }, 100);
+                    }
+                }, 100);
+            }
+        }
+        
+        function testProgressBar() {
+            log('Testing progress bar...');
+            
+            const progressBar = testDoc.querySelector('#progress-bar');
+            if (progressBar) {
+                const initialWidth = progressBar.style.width;
+                
+                // Fill some form fields to trigger progress update
+                const nameInput = testDoc.querySelector('#name');
+                if (nameInput) {
+                    nameInput.value = 'Test User';
+                    nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    
+                    setTimeout(() => {
+                        const newWidth = progressBar.style.width;
+                        const widthChanged = newWidth !== initialWidth;
+                        addTestResult(
+                            'Progress Bar Update',
+                            widthChanged,
+                            `Width changed from "${initialWidth}" to "${newWidth}"`
+                        );
+                    }, 200);
+                }
+            }
+        }
+        
+        function testClearForm() {
+            log('Testing clear form functionality...');
+            
+            const clearBtn = testDoc.querySelector('#clear-form');
+            const nameInput = testDoc.querySelector('#name');
+            
+            if (clearBtn && nameInput) {
+                // Set some test data
+                nameInput.value = 'Test User';
+                nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+                
+                setTimeout(() => {
+                    // Clear the form
+                    clearBtn.click();
+                    
+                    setTimeout(() => {
+                        const nameValue = nameInput.value;
+                        const namePreview = testDoc.querySelector('.preview-name').textContent;
+                        
+                        addTestResult(
+                            'Clear Form Input',
+                            nameValue === '',
+                            `Name input value: "${nameValue}"`
+                        );
+                        
+                        addTestResult(
+                            'Clear Form Preview Reset',
+                            namePreview === 'OLIVIA WILSON', // Default value
+                            `Preview shows: "${namePreview}"`
+                        );
+                    }, 100);
+                }, 100);
+            }
+        }
+        
+        function testResponsiveness() {
+            log('Testing responsive design...');
+            
+            const iframe = document.getElementById('testFrame');
+            const originalWidth = iframe.style.width;
+            
+            // Test mobile width
+            iframe.style.width = '600px';
+            
+            setTimeout(() => {
+                const main = testDoc.querySelector('main');
+                if (main) {
+                    const computedStyle = testFrame.contentWindow.getComputedStyle(main);
+                    const gridCols = computedStyle.gridTemplateColumns;
+                    
+                    addTestResult(
+                        'Responsive Design (600px)',
+                        gridCols.includes('1fr') || gridCols === 'none',
+                        `Grid columns: ${gridCols}`
+                    );
+                }
+                
+                // Reset width
+                iframe.style.width = originalWidth;
+            }, 500);
+        }
+        
+        function testPDFDownload() {
+            log('Testing PDF download functionality...');
+            
+            const downloadBtn = testDoc.querySelector('#download-pdf');
+            if (downloadBtn) {
+                // Check if html2pdf library is loaded
+                const html2pdfLoaded = testFrame.contentWindow.html2pdf !== undefined;
+                
+                addTestResult(
+                    'PDF Library Loaded',
+                    html2pdfLoaded,
+                    `html2pdf available: ${html2pdfLoaded}`
+                );
+                
+                // Test button click (without actually downloading)
+                const originalText = downloadBtn.textContent;
+                
+                if (html2pdfLoaded) {
+                    addTestResult(
+                        'PDF Download Button',
+                        true,
+                        'Button is present and library is loaded'
+                    );
+                } else {
+                    addTestResult(
+                        'PDF Download Button',
+                        false,
+                        'html2pdf library not loaded'
+                    );
+                }
+            }
+        }
+        
+        async function runAllTests() {
+            clearResults();
+            log('Starting comprehensive test suite...');
+            
+            // Wait for frame to be ready
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            testBasicElements();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            testFormInputs();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            testEducationSection();
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            testExperienceSection();
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            testSkillsSection();
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            testProgressBar();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            testClearForm();
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            testPDFDownload();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            testResponsiveness();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // Generate summary
+            const totalTests = testResults.length;
+            const passedTests = testResults.filter(r => r.passed).length;
+            const failedTests = totalTests - passedTests;
+            
+            log(`\n=== TEST SUMMARY ===`);
+            log(`Total Tests: ${totalTests}`);
+            log(`Passed: ${passedTests}`);
+            log(`Failed: ${failedTests}`);
+            log(`Success Rate: ${Math.round((passedTests / totalTests) * 100)}%`);
+        }
+        
+        // Initialize when iframe loads
+        document.getElementById('testFrame').addEventListener('load', function() {
+            setTimeout(initTestFramework, 500);
+        });
+        
+    </script>
+</body>
+</html>
