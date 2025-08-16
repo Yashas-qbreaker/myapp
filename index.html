@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Resume Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+  <main>
+    <section id="resume-form-section">
+      <h2>Resume Form</h2>
+      <form id="resume-form">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" placeholder="Your Name">
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com">
+        </div>
+        <div>
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+        </div>
+        <div>
+          <label for="summary">Profile Summary:</label>
+          <textarea id="summary" name="summary" rows="3" placeholder="Brief summary about yourself"></textarea>
+        </div>
+        <fieldset>
+          <legend>Education</legend>
+          <div class="education-row">
+            <input type="text" name="degree" placeholder="Degree">
+            <input type="text" name="school" placeholder="School">
+            <input type="text" name="year" placeholder="Year">
+            <button type="button" class="remove-education">Remove</button>
+          </div>
+          <button type="button" id="add-education">Add Row</button>
+        </fieldset>
+        <fieldset>
+          <legend>Skills</legend>
+          <div class="skills-tags" id="skills-tags">
+            <span class="skill-tag" data-skill="HTML">HTML <span class="remove-skill">×</span></span>
+            <span class="skill-tag" data-skill="CSS">CSS <span class="remove-skill">×</span></span>
+            <span class="skill-tag" data-skill="JavaScript">JavaScript <span class="remove-skill">×</span></span>
+            <span class="skill-tag" data-skill="Python">Python <span class="remove-skill">×</span></span>
+            <span class="skill-tag" data-skill="Other">Other <span class="remove-skill">×</span></span>
+          </div>
+          <input type="text" id="add-skill-input" placeholder="Add a skill and press Enter" autocomplete="off" style="margin-top:8px;">
+        </fieldset>
+        <fieldset>
+          <legend>Experience</legend>
+          <div class="experience-row">
+            <input type="text" name="role" placeholder="Role">
+            <input type="text" name="company" placeholder="Company">
+            <input type="text" name="duration" placeholder="Duration">
+            <button type="button" class="remove-experience">Remove</button>
+          </div>
+          <button type="button" id="add-experience">Add Row</button>
+        </fieldset>
+        <button type="button" id="clear-form">Clear Form</button>
+      </form>
+    </section>
+    <section id="resume-preview-section">
+      <article class="resume-preview">
+        <header class="resume-header">
+          <h1 class="preview-name">OLIVIA WILSON</h1>
+          <div class="preview-contact">
+            MARKETING MANAGER
+          </div>
+        </header>
+        
+        <div class="preview-content">
+          <div class="left-column">
+            <section class="preview-contact-info">
+              <h3 class="card-heading">CONTACT</h3>
+              <ul class="contact-list">
+                <li>📱 <span class="preview-phone">+1 (555) 123-4567</span></li>
+                <li>📧 <span class="preview-email">olivia.wilson@email.com</span></li>
+                <li>📍 New York, NY 10001</li>
+                <li>🌐 linkedin.com/in/oliviawilson</li>
+              </ul>
+            </section>
+            
+            <section class="preview-education">
+              <h3 class="card-heading">EDUCATION</h3>
+              <ul class="education-list">
+                <li class="education-item">
+                  <strong>2029 - 2030 BORCELLE UNIVERSITY</strong><br>
+                  Master of Business Management
+                </li>
+                <li class="education-item">
+                  <strong>2025 - 2029 BORCELLE UNIVERSITY</strong><br>
+                  Bachelor of Business Management<br>
+                  GPA: 3.8/4.0
+                </li>
+              </ul>
+            </section>
+            
+            <section class="preview-skills">
+              <h3 class="card-heading">SKILLS</h3>
+              <ul class="skills-list">
+                <li>Project Management</li>
+                <li>Public Relations</li>
+                <li>Teamwork</li>
+                <li>Time Management</li>
+                <li>Leadership</li>
+                <li>Effective Communication</li>
+                <li>Critical Thinking</li>
+              </ul>
+            </section>
+            
+            <section class="preview-languages">
+              <h3 class="card-heading">LANGUAGES</h3>
+              <ul class="languages-list">
+                <li>English: Fluent</li>
+                <li>French: Fluent</li>
+                <li>German: Basics</li>
+                <li>Spanish: Intermediate</li>
+              </ul>
+            </section>
+          </div>
+          
+          <div class="right-column">
+            <section class="preview-summary">
+              <h3 class="card-heading">PROFILE SUMMARY</h3>
+              <p class="preview-summary-text">
+                Dynamic and results-driven Marketing Manager with 5+ years of experience in developing and executing comprehensive marketing strategies. Proven track record of increasing brand awareness, driving customer engagement, and achieving measurable business growth. Skilled in digital marketing, brand management, and team leadership with a passion for innovative marketing solutions.
+              </p>
+            </section>
+            
+            <section class="preview-experience">
+              <h3 class="card-heading">WORK EXPERIENCE</h3>
+              <ul class="experience-list">
+                <li class="experience-item">
+                  <strong>Borcelle Studio (2030 - PRESENT)</strong><br>
+                  <em>Marketing Manager & Specialist</em>
+                  <ul class="achievement-list">
+                    <li>Led successful rebranding campaign resulting in 40% increase in brand recognition</li>
+                    <li>Managed team of 8 marketing professionals and coordinated cross-functional projects</li>
+                  </ul>
+                </li>
+                <li class="experience-item">
+                  <strong>Fauget Studio (2025 - 2029)</strong><br>
+                  <br>
+                  <em>Marketing Manager & Specialist</em>
+                  <ul class="achievement-list">
+                    <li>Developed and executed digital marketing strategies across multiple platforms</li>
+                    <li>Increased social media engagement by 65% through targeted content campaigns</li>
+                  </ul>
+                </li>
+                <li class="experience-item">
+                  <strong>Studio Shodwe (2024 - 2025)</strong><br>
+                  <em>Marketing Manager & Specialist</em>
+                  <ul class="achievement-list">
+                    <li>Managed client relationships and delivered marketing solutions for diverse industries</li>
+                    <li>Coordinated successful product launch campaigns with measurable ROI</li>
+                    <li>Implemented data-driven marketing strategies improving conversion rates by 25%</li>
+                  </ul>
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <div style="text-align:center; margin: 24px 0;">
+    <button type="button" id="download-pdf">Download PDF</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
