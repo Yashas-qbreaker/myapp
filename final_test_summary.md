@@ -87,4 +87,8 @@ The Interactive Resume Builder is **production-ready** and provides excellent fu
 
 *Test completed by automated testing suite and manual code review*  
 *Date: December 2024*  
+<<<<<<< HEAD
 *Server: http://localhost:8000*
+=======
+*Server: http://localhost:8000*
+>>>>>>> f9e774d4f65b987ece095202bf3833b1220e3f49

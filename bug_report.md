@@ -157,4 +157,8 @@ The Interactive Resume Builder is a well-designed, functional web application wi
 - **Medium Issues**: 1
 - **Success Rate**: 93%
 
+<<<<<<< HEAD
 The application is production-ready with minor fixes for broader browser support.
+=======
+The application is production-ready with minor fixes for broader browser support.
+>>>>>>> f9e774d4f65b987ece095202bf3833b1220e3f49
