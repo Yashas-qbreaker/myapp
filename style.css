@@ -212,7 +212,7 @@ textarea {
 /* ===== EDUCATION & EXPERIENCE ROWS ===== */
 .education-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 0.8fr auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
   gap: var(--space-sm);
   margin-bottom: var(--space-sm);
   background: var(--bg-white);

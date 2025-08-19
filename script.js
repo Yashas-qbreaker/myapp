@@ -655,4 +655,32 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   });
+
+  // Set up remove button event listeners for additional rows
+  document.querySelectorAll('.skill-row .remove-skill-row').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const row = btn.closest('.skill-row');
+      animateRemoveRow(row, updateSkillsPreview);
+    });
+  });
+
+  document.querySelectorAll('.language-row .remove-language').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const row = btn.closest('.language-row');
+      animateRemoveRow(row, updateLanguagesPreview);
+    });
+  });
+
+  document.querySelectorAll('.experience-row .remove-experience').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const row = btn.closest('.experience-row');
+      animateRemoveRow(row, updateExperiencePreview);
+    });
+  });
+
+  // Initial update of all previews to show pre-populated data
+  updateEducationPreview();
+  updateSkillsPreview();
+  updateLanguagesPreview();
+  updateExperiencePreview();
 });

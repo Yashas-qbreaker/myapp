@@ -16,31 +16,31 @@
       <form id="resume-form">
         <div>
           <label for="name">Name:</label>
-          <input type="text" id="name" name="name" placeholder="Your Name">
+          <input type="text" id="name" name="name" placeholder="Your Name" value="OLIVIA WILSON">
         </div>
         <div>
           <label for="title">Professional Title:</label>
-          <input type="text" id="title" name="title" placeholder="e.g., Marketing Manager">
+          <input type="text" id="title" name="title" placeholder="e.g., Marketing Manager" value="MARKETING MANAGER">
         </div>
         <div>
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com">
+          <input type="email" id="email" name="email" placeholder="you@example.com" value="olivia.wilson@email.com">
         </div>
         <div>
           <label for="phone">Phone Number:</label>
-          <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890">
+          <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" value="+1 (555) 123-4567">
         </div>
         <div>
           <label for="address">Address:</label>
-          <input type="text" id="address" name="address" placeholder="City, State ZIP">
+          <input type="text" id="address" name="address" placeholder="City, State ZIP" value="New York, NY 10001">
         </div>
         <div>
           <label for="linkedin">LinkedIn Profile:</label>
-          <input type="text" id="linkedin" name="linkedin" placeholder="linkedin.com/in/yourprofile">
+          <input type="text" id="linkedin" name="linkedin" placeholder="linkedin.com/in/yourprofile" value="linkedin.com/in/oliviawilson">
         </div>
         <div>
           <label for="summary">Profile Summary:</label>
-          <textarea id="summary" name="summary" rows="4" placeholder="Brief summary about yourself"></textarea>
+          <textarea id="summary" name="summary" rows="4" placeholder="Brief summary about yourself">Dynamic and results-driven Marketing Manager with 5+ years of experience in developing and executing comprehensive marketing strategies. Proven track record of increasing brand awareness, driving customer engagement, and achieving measurable business growth. Skilled in digital marketing, brand management, and team leadership with a passion for innovative marketing solutions.</textarea>
         </div>
         
         <!-- Education Section -->
@@ -51,10 +51,10 @@
           </div>
           <div class="section-content" id="education-content">
             <div class="education-row">
-              <input type="text" name="degree" placeholder="Degree">
-              <input type="text" name="school" placeholder="School">
-              <input type="text" name="year" placeholder="Year">
-              <input type="text" name="gpa" placeholder="GPA (optional)">
+              <input type="text" name="degree" placeholder="Degree" value="Master of Business Administration">
+              <input type="text" name="school" placeholder="School" value="Harvard Business School">
+              <input type="text" name="year" placeholder="Year" value="2018 - 2020">
+              <input type="text" name="gpa" placeholder="GPA (optional)" value="3.9">
               <button type="button" class="remove-education">Remove</button>
             </div>
             <button type="button" id="add-education">Add Row</button>
@@ -70,7 +70,19 @@
           <div class="section-content" id="skills-content">
             <div class="skills-rows" id="skills-rows">
               <div class="skill-row">
-                <input type="text" name="skill" placeholder="Enter a skill">
+                <input type="text" name="skill" placeholder="Enter a skill" value="Digital Marketing">
+                <button type="button" class="remove-skill-row">Remove</button>
+              </div>
+              <div class="skill-row">
+                <input type="text" name="skill" placeholder="Enter a skill" value="Project Management">
+                <button type="button" class="remove-skill-row">Remove</button>
+              </div>
+              <div class="skill-row">
+                <input type="text" name="skill" placeholder="Enter a skill" value="Data Analytics">
+                <button type="button" class="remove-skill-row">Remove</button>
+              </div>
+              <div class="skill-row">
+                <input type="text" name="skill" placeholder="Enter a skill" value="Team Leadership">
                 <button type="button" class="remove-skill-row">Remove</button>
               </div>
             </div>
@@ -87,11 +99,33 @@
           <div class="section-content" id="languages-content">
             <div class="languages-rows" id="languages-rows">
               <div class="language-row">
-                <input type="text" name="language" placeholder="Language">
+                <input type="text" name="language" placeholder="Language" value="English">
                 <select name="proficiency">
                   <option value="">Select Proficiency</option>
                   <option value="Basics">Basics</option>
                   <option value="Intermediate">Intermediate</option>
+                  <option value="Fluent">Fluent</option>
+                  <option value="Native" selected>Native</option>
+                </select>
+                <button type="button" class="remove-language">Remove</button>
+              </div>
+              <div class="language-row">
+                <input type="text" name="language" placeholder="Language" value="Spanish">
+                <select name="proficiency">
+                  <option value="">Select Proficiency</option>
+                  <option value="Basics">Basics</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Fluent" selected>Fluent</option>
+                  <option value="Native">Native</option>
+                </select>
+                <button type="button" class="remove-language">Remove</button>
+              </div>
+              <div class="language-row">
+                <input type="text" name="language" placeholder="Language" value="French">
+                <select name="proficiency">
+                  <option value="">Select Proficiency</option>
+                  <option value="Basics">Basics</option>
+                  <option value="Intermediate" selected>Intermediate</option>
                   <option value="Fluent">Fluent</option>
                   <option value="Native">Native</option>
                 </select>
@@ -110,10 +144,23 @@
           </div>
           <div class="section-content" id="experience-content">
             <div class="experience-row">
-              <input type="text" name="company" placeholder="Company">
-              <input type="text" name="role" placeholder="Role">
-              <input type="text" name="duration" placeholder="Duration">
-              <textarea name="achievements" rows="3" placeholder="List your achievements (one per line)"></textarea>
+              <input type="text" name="company" placeholder="Company" value="TechCorp Solutions">
+              <input type="text" name="role" placeholder="Role" value="Senior Marketing Manager">
+              <input type="text" name="duration" placeholder="Duration" value="2020 - Present">
+              <textarea name="achievements" rows="3" placeholder="List your achievements (one per line)">Led cross-functional team of 12 to launch 3 major product campaigns
+Increased brand awareness by 45% through integrated marketing strategies
+Generated $2.5M in new revenue through targeted digital campaigns
+Implemented marketing automation reducing costs by 30%</textarea>
+              <button type="button" class="remove-experience">Remove</button>
+            </div>
+            <div class="experience-row">
+              <input type="text" name="company" placeholder="Company" value="Global Marketing Inc">
+              <input type="text" name="role" placeholder="Role" value="Marketing Specialist">
+              <input type="text" name="duration" placeholder="Duration" value="2018 - 2020">
+              <textarea name="achievements" rows="3" placeholder="List your achievements (one per line)">Developed and executed social media strategy reaching 2M+ users monthly
+Coordinated with design team to create compelling visual content
+Analyzed market trends and consumer behavior to optimize campaigns
+Managed client relationships and maintained 95% retention rate</textarea>
               <button type="button" class="remove-experience">Remove</button>
             </div>
             <button type="button" id="add-experience">Add Row</button>
