@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
   // === COLLAPSIBLE SECTIONS FUNCTIONALITY ===
   function initializeCollapsibleSections() {
