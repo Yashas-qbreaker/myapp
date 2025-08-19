@@ -52,17 +52,18 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Get default values for form fields
+  const DEFAULTS = {
+    'name': 'OLIVIA WILSON',
+    'title': 'MARKETING MANAGER',
+    'email': 'olivia.wilson@email.com',
+    'phone': '+1 (555) 123-4567',
+    'address': 'New York, NY 10001',
+    'linkedin': 'linkedin.com/in/oliviawilson',
+    'summary': 'Dynamic and results-driven Marketing Manager with 5+ years of experience in developing and executing comprehensive marketing strategies. Proven track record of increasing brand awareness, driving customer engagement, and achieving measurable business growth. Skilled in digital marketing, brand management, and team leadership with a passion for innovative marketing solutions.'
+  };
+
   function getDefaultValue(fieldName) {
-    const defaults = {
-      'name': 'OLIVIA WILSON',
-      'title': 'MARKETING MANAGER',
-      'email': 'olivia.wilson@email.com',
-      'phone': '+1 (555) 123-4567',
-      'address': 'New York, NY 10001',
-      'linkedin': 'linkedin.com/in/oliviawilson',
-      'summary': 'Dynamic and results-driven Marketing Manager with 5+ years of experience in developing and executing comprehensive marketing strategies. Proven track record of increasing brand awareness, driving customer engagement, and achieving measurable business growth. Skilled in digital marketing, brand management, and team leadership with a passion for innovative marketing solutions.'
-    };
-    return defaults[fieldName] || '';
+    return DEFAULTS[fieldName] || '';
   }
 
   // === EDUCATION SECTION ===
@@ -98,9 +99,23 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!educationList) return;
     educationList.innerHTML = '';
     const rows = document.querySelectorAll('.education-row');
-    
-    if (rows.length === 0) {
-      // Show default education
+    let added = 0;
+
+    rows.forEach(row => {
+      const degree = row.querySelector('input[name="degree"]').value;
+      const school = row.querySelector('input[name="school"]').value;
+      const year = row.querySelector('input[name="year"]').value;
+      const gpa = row.querySelector('input[name="gpa"]').value;
+      if (degree || school || year) {
+        const li = createEducationPreviewItem(degree, school, year, gpa);
+        educationList.appendChild(li);
+        animatePreviewItem(li);
+        added++;
+      }
+    });
+
+    if (added === 0) {
+      // Show default education when no filled rows
       const li = document.createElement('li');
       li.className = 'education-item';
       li.innerHTML = `
@@ -116,20 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
         Bachelor of Business Management - GPA: 3.8
       `;
       educationList.appendChild(li2);
-      return;
     }
-
-    rows.forEach(row => {
-      const degree = row.querySelector('input[name="degree"]').value;
-      const school = row.querySelector('input[name="school"]').value;
-      const year = row.querySelector('input[name="year"]').value;
-      const gpa = row.querySelector('input[name="gpa"]').value;
-      if (degree || school || year) {
-        const li = createEducationPreviewItem(degree, school, year, gpa);
-        educationList.appendChild(li);
-        animatePreviewItem(li);
-      }
-    });
   }
 
   // === SKILLS SECTION ===
@@ -151,17 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!skillsList) return;
     skillsList.innerHTML = '';
     const rows = document.querySelectorAll('.skill-row');
-    
-    if (rows.length === 0) {
-      // Show default skills
-      const defaultSkills = ['Project Management', 'Public Speaking', 'Digital Marketing', 'Time Management', 'Leadership', 'Effective Communication', 'Critical Thinking'];
-      defaultSkills.forEach(skill => {
-        const li = document.createElement('li');
-        li.textContent = skill;
-        skillsList.appendChild(li);
-      });
-      return;
-    }
+    let added = 0;
 
     rows.forEach(row => {
       const skill = row.querySelector('input[name="skill"]').value.trim();
@@ -171,8 +163,19 @@ document.addEventListener('DOMContentLoaded', function () {
         li.classList.add('fade-in-up');
         skillsList.appendChild(li);
         setTimeout(() => li.classList.remove('fade-in-up'), 700);
+        added++;
       }
     });
+
+    if (added === 0) {
+      // Show default skills when no filled rows
+      const defaultSkills = ['Project Management', 'Public Speaking', 'Digital Marketing', 'Time Management', 'Leadership', 'Effective Communication', 'Critical Thinking'];
+      defaultSkills.forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill;
+        skillsList.appendChild(li);
+      });
+    }
   }
 
   // === LANGUAGES SECTION ===
@@ -201,9 +204,23 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!languagesList) return;
     languagesList.innerHTML = '';
     const rows = document.querySelectorAll('.language-row');
-    
-    if (rows.length === 0) {
-      // Show default languages
+    let added = 0;
+
+    rows.forEach(row => {
+      const language = row.querySelector('input[name="language"]').value.trim();
+      const proficiency = row.querySelector('select[name="proficiency"]').value;
+      if (language && proficiency) {
+        const li = document.createElement('li');
+        li.textContent = `${language}: ${proficiency}`;
+        li.classList.add('fade-in-up');
+        languagesList.appendChild(li);
+        setTimeout(() => li.classList.remove('fade-in-up'), 700);
+        added++;
+      }
+    });
+
+    if (added === 0) {
+      // Show default languages when no filled rows
       const defaultLanguages = [
         { language: 'English', proficiency: 'Fluent' },
         { language: 'French', proficiency: 'Fluent' },
@@ -215,20 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
         li.textContent = `${language}: ${proficiency}`;
         languagesList.appendChild(li);
       });
-      return;
     }
-
-    rows.forEach(row => {
-      const language = row.querySelector('input[name="language"]').value.trim();
-      const proficiency = row.querySelector('select[name="proficiency"]').value;
-      if (language && proficiency) {
-        const li = document.createElement('li');
-        li.textContent = `${language}: ${proficiency}`;
-        li.classList.add('fade-in-up');
-        languagesList.appendChild(li);
-        setTimeout(() => li.classList.remove('fade-in-up'), 700);
-      }
-    });
   }
 
   // === EXPERIENCE SECTION ===
@@ -269,9 +273,23 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!experienceList) return;
     experienceList.innerHTML = '';
     const rows = document.querySelectorAll('.experience-row');
-    
-    if (rows.length === 0) {
-      // Show default experience
+    let added = 0;
+
+    rows.forEach(row => {
+      const company = row.querySelector('input[name="company"]').value;
+      const role = row.querySelector('input[name="role"]').value;
+      const duration = row.querySelector('input[name="duration"]').value;
+      const achievements = row.querySelector('textarea[name="achievements"]').value;
+      if (company || role || duration) {
+        const li = createExperiencePreviewItem(company, role, duration, achievements);
+        experienceList.appendChild(li);
+        animatePreviewItem(li);
+        added++;
+      }
+    });
+
+    if (added === 0) {
+      // Show default experience when no filled rows
       const li = document.createElement('li');
       li.className = 'experience-item';
       li.innerHTML = `
@@ -310,20 +328,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </ul>
       `;
       experienceList.appendChild(li3);
-      return;
     }
-
-    rows.forEach(row => {
-      const company = row.querySelector('input[name="company"]').value;
-      const role = row.querySelector('input[name="role"]').value;
-      const duration = row.querySelector('input[name="duration"]').value;
-      const achievements = row.querySelector('textarea[name="achievements"]').value;
-      if (company || role || duration) {
-        const li = createExperiencePreviewItem(company, role, duration, achievements);
-        experienceList.appendChild(li);
-        animatePreviewItem(li);
-      }
-    });
   }
 
   // === ANIMATION FUNCTIONS ===
@@ -484,11 +489,10 @@ document.addEventListener('DOMContentLoaded', function () {
     resumeForm.reset();
 
     // Reset preview to default values
-    Object.keys(getDefaultValue('')).forEach(field => {
-      const preview = document.querySelector('.preview-' + field.replace('_', '-'));
-      if (preview) {
-        preview.textContent = getDefaultValue(field);
-      }
+    Object.keys(DEFAULTS).forEach(field => {
+      const className = field === 'summary' ? 'preview-summary-text' : 'preview-' + field;
+      const preview = document.querySelector('.' + className);
+      if (preview) preview.textContent = DEFAULTS[field];
     });
 
     // Remove all but the first row from each section
@@ -537,15 +541,30 @@ document.addEventListener('DOMContentLoaded', function () {
     downloadBtn.addEventListener('click', function () {
       downloadBtn.textContent = 'Generating PDF...';
       downloadBtn.disabled = true;
-      
-      html2pdf().from(resumePreview).save('resume.pdf').then(() => {
-        downloadBtn.textContent = 'Download PDF';
-        downloadBtn.disabled = false;
-      }).catch(() => {
-        downloadBtn.textContent = 'Download PDF';
-        downloadBtn.disabled = false;
-        alert('Error generating PDF. Please try again.');
-      });
+
+      // Calculate full size of the resume card to make a single-page PDF
+      const width = Math.ceil(resumePreview.scrollWidth);
+      const height = Math.ceil(resumePreview.scrollHeight);
+
+      const opts = {
+        margin:       0,
+        filename:     'resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+        pagebreak:    { mode: ['avoid-all'] },
+        jsPDF:        { unit: 'px', format: [width, height], orientation: 'portrait' }
+      };
+
+      html2pdf().set(opts).from(resumePreview).save()
+        .then(() => {
+          downloadBtn.textContent = 'Download PDF';
+          downloadBtn.disabled = false;
+        })
+        .catch(() => {
+          downloadBtn.textContent = 'Download PDF';
+          downloadBtn.disabled = false;
+          alert('Error generating PDF. Please try again.');
+        });
     });
   }
 
