@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
   // === COLLAPSIBLE SECTIONS FUNCTIONALITY ===
   function initializeCollapsibleSections() {
@@ -54,13 +53,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Get default values for form fields
   const DEFAULTS = {
-    'name': 'OLIVIA WILSON',
-    'title': 'MARKETING MANAGER',
-    'email': 'olivia.wilson@email.com',
-    'phone': '+1 (555) 123-4567',
-    'address': 'New York, NY 10001',
-    'linkedin': 'linkedin.com/in/oliviawilson',
-    'summary': 'Dynamic and results-driven Marketing Manager with 5+ years of experience in developing and executing comprehensive marketing strategies. Proven track record of increasing brand awareness, driving customer engagement, and achieving measurable business growth. Skilled in digital marketing, brand management, and team leadership with a passion for innovative marketing solutions.'
+    'name': 'YASHAS GOWDA A',
+    'title': 'UI/UX DESIGNER',
+    'email': 'yashasgowdaa@gmail.com',
+    'phone': '+91 9845000000',
+    'address': 'MANDYA, ALUR 571428',
+    'linkedin': 'linkedin.com/in/yashasgowdaa',
+    'summary': 'Creative and detail-oriented UI/UX Designer with a strong passion for crafting intuitive and visually appealing digital experiences. Skilled in user-centered design, wireframing, prototyping, and usability testing with a focus on delivering seamless interactions. Proven ability to collaborate with cross-functional teams to translate business needs into innovative design solutions.'
   };
 
   function getDefaultValue(fieldName) {
@@ -120,16 +119,16 @@ document.addEventListener('DOMContentLoaded', function () {
       const li = document.createElement('li');
       li.className = 'education-item';
       li.innerHTML = `
-        <strong>2031 BORCELLE UNIVERSITY</strong><br>
-        Master of Business Management
+        <strong>2021 - 2022 Global mahesh pu college</strong><br>
+        PUC in PCMB - 84%
       `;
       educationList.appendChild(li);
       
       const li2 = document.createElement('li');
       li2.className = 'education-item';
       li2.innerHTML = `
-        <strong>2029 - 2030 BORCELLE UNIVERSITY</strong><br>
-        Bachelor of Business Management - GPA: 3.8
+        <strong>2023 - 2027 PES college of engineering, mandya</strong><br>
+        B.E in Information Science and Engineering - GPA: 8.5
       `;
       educationList.appendChild(li2);
     }
@@ -170,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (added === 0) {
       // Show default skills when no filled rows
-      const defaultSkills = ['Project Management', 'Public Speaking', 'Digital Marketing', 'Time Management', 'Leadership', 'Effective Communication', 'Critical Thinking'];
+      const defaultSkills = ['Project Management', 'Public Speaking', 'Digital Marketing', 'Time Management', 'Critical Thinking'];
       defaultSkills.forEach(skill => {
         const li = document.createElement('li');
         li.textContent = skill;
@@ -224,9 +223,8 @@ document.addEventListener('DOMContentLoaded', function () {
       // Show default languages when no filled rows
       const defaultLanguages = [
         { language: 'English', proficiency: 'Fluent' },
-        { language: 'French', proficiency: 'Fluent' },
-        { language: 'German', proficiency: 'Basics' },
-        { language: 'Spanish', proficiency: 'Intermediate' }
+        { language: 'Kannada', proficiency: 'Native' },
+        { language: 'Hindi', proficiency: 'Basics' }
       ];
       defaultLanguages.forEach(({ language, proficiency }) => {
         const li = document.createElement('li');
@@ -294,41 +292,29 @@ document.addEventListener('DOMContentLoaded', function () {
       const li = document.createElement('li');
       li.className = 'experience-item';
       li.innerHTML = `
-        <strong>Borcelle Studio (2030 - PRESENT)</strong><br>
-        <em>Marketing Manager & Specialist</em>
-        <ul class="achievement-list">
-          <li>Led successful rebranding campaign resulting in 40% increase in brand recognition</li>
-          <li>Managed team of 8 marketing professionals and coordinated cross-functional projects</li>
-          <li>Developed and executed comprehensive digital marketing strategies across multiple platforms</li>
-        </ul>
+       <strong>Vault of Codes (2025 - PRESENT)</strong><br>
+       <em>Web Developer Intern</em>
+       <ul class="achievement-list">
+          <li>Worked on web development projects focusing on responsive and user-friendly design</li>
+          <li>Building skills in UI/UX design while contributing to real-world projects</li>
+          <li>Focused on learning and applying design principles to create impactful solutions</li>
+       </ul>
       `;
       experienceList.appendChild(li);
       
       const li2 = document.createElement('li');
       li2.className = 'experience-item';
       li2.innerHTML = `
-        <strong>Forget Studio (2018 - 2020)</strong><br>
-        <em>Marketing Manager & Specialist</em>
+        <strong>BeaconAid (2024 - PRESENT)</strong><br>
+        <em>Founder & Developer</em>
         <ul class="achievement-list">
-          <li>Coordinated market research to identify emerging trends and consumer preferences</li>
-          <li>Optimized online advertising campaigns, resulting in 25% increase in ROI</li>
-          <li>Developed and implemented SEO strategies that improved website rankings by 35%</li>
+           <li>Designed and developed a disaster management application integrating AI and real-time SOS systems</li>
+           <li>Created paper prototypes and UI flows focusing on Material 3 and dark mode design principles</li>
+           <li>Implemented features such as SOS activation, Wi-Fi Direct mesh networking, and AI assistant integration</li>
         </ul>
       `;
       experienceList.appendChild(li2);
       
-      const li3 = document.createElement('li');
-      li3.className = 'experience-item';
-      li3.innerHTML = `
-        <strong>Studio Shadow (2021 - 2026)</strong><br>
-        <em>Marketing Manager & Specialist</em>
-        <ul class="achievement-list">
-          <li>Developed and executed lead-generation marketing campaigns, resulting in 15,000 thousand leads per month</li>
-          <li>Implemented SEO strategies that increased website visibility by 60%</li>
-          <li>Analyzed performance metrics and user behavior data to optimize marketing campaigns and promotional materials</li>
-        </ul>
-      `;
-      experienceList.appendChild(li3);
     }
   }
 
@@ -543,17 +529,13 @@ document.addEventListener('DOMContentLoaded', function () {
       downloadBtn.textContent = 'Generating PDF...';
       downloadBtn.disabled = true;
 
-      // Calculate full size of the resume card to make a single-page PDF
-      const width = Math.ceil(resumePreview.scrollWidth);
-      const height = Math.ceil(resumePreview.scrollHeight);
-
       const opts = {
-        margin:       0,
-        filename:     'resume.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-        pagebreak:    { mode: ['avoid-all'] },
-        jsPDF:        { unit: 'px', format: [width, height], orientation: 'portrait' }
+        margin: 0,
+        filename: 'resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+        pagebreak: { mode: ['avoid-all'] },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
       html2pdf().set(opts).from(resumePreview).save()

@@ -1,7 +1,6 @@
 /* ===== CSS VARIABLES ===== */
 :root {
   --accent: #2c3e50;
-  --accent-light: #34495e;
   --accent-blue: #3498db;
   --text-primary: #2c3e50;
   --text-secondary: #7f8c8d;
@@ -41,7 +40,6 @@ html, body {
   overflow-x: auto;
 }
 body {
-  /* Remove transform: scale and width overrides */
   min-height: 100vh;
 }
 
@@ -50,8 +48,6 @@ main {
   display: grid;
   grid-template-columns: 45% 50%;
   gap: var(--space-xl);
-  max-width: 100%;
-  min-height: calc(100vh - 60px);
   margin: var(--space-2xl) auto;
   padding: 0 2.5%;
   align-items: stretch;
@@ -73,6 +69,14 @@ main {
   position: sticky;
   top: var(--space-2xl);
   overflow-y: auto;
+  width: 95%;
+  max-width: 280mm; /* Increased form card width to match preview */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+#resume-form-section::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 #resume-form-section h2 {
@@ -418,7 +422,7 @@ button,
 
 button:hover, 
 #download-pdf:hover {
-  background: var(--accent-light);
+  background: #34495e;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -454,56 +458,59 @@ button:hover,
   overflow-y: auto;
   overflow-x: hidden;
   min-width: 0;
+  width: 107%;
+  max-width: 280mm; /* Increased outer card width */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+#resume-preview-section::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .resume-preview {
   background: var(--bg-white);
   border-radius: var(--radius-md);
-  padding: var(--space-2xl);
+  padding: var(--space-xl);
   width: 100%;
-  max-width: 740px;
+  max-width: 210mm; /* ISO A4 width */
   color: var(--text-primary);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
   margin: 0 auto;
-  height: auto;
+  height: fit-content;
   position: relative;
   z-index: 2;
-  /* Remove overflow-y: auto; so only the outer section scrolls */
+  box-sizing: border-box;
 }
 
 /* ===== PREVIEW HEADER ===== */
 .resume-preview header {
   text-align: center;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
   border-bottom: 3px solid var(--accent);
-  padding-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
 }
 
 .preview-name {
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   color: var(--accent);
   margin: 0 0 var(--space-sm) 0;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
+  line-height: 1.1;
 }
 
-.preview-contact {
-  color: var(--text-secondary);
-  font-size: 1.3rem;
-  margin-bottom: var(--space-md);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+
 
 /* ===== PREVIEW CONTENT LAYOUT ===== */
 .preview-content {
   display: grid;
   grid-template-columns: 35% 65%;
-  gap: var(--space-2xl);
-  margin-top: var(--space-2xl);
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+  min-height: 0;
 }
 
 .left-column {
@@ -517,18 +524,18 @@ button:hover,
 
 /* ===== PREVIEW SECTIONS ===== */
 .resume-preview section {
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
 }
 
 .card-heading {
   color: var(--accent);
   font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: var(--space-md);
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-bottom: 2px solid var(--accent-blue);
-  padding-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
 }
 
 /* ===== PREVIEW LISTS ===== */
@@ -539,30 +546,19 @@ button:hover,
 }
 
 .resume-preview li {
-  margin-bottom: var(--space-sm);
-  padding: var(--space-sm) 0;
+  margin-bottom: var(--space-xs);
+  padding: var(--space-xs) 0;
   border-bottom: 1px solid var(--border-light);
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .resume-preview li:last-child {
   border-bottom: none;
 }
 
-/* ===== PREVIEW ELEMENTS ===== */
-.resume-preview .preview-degree,
-.resume-preview .preview-school,
-.resume-preview .preview-year,
-.resume-preview .preview-role,
-.resume-preview .preview-company,
-.resume-preview .preview-duration,
-.resume-preview .preview-email,
-.resume-preview .preview-phone {
-  font-weight: 600;
-  color: var(--text-primary);
-}
+
 
 .preview-email,
 .preview-phone {
@@ -577,17 +573,7 @@ button:hover,
   margin: 0;
 }
 
-/* ===== SKILL TAGS IN PREVIEW ===== */
-.preview-skill {
-  background: var(--bg-gray);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  display: inline-block;
-  margin: var(--space-xs) var(--space-xs) var(--space-xs) 0;
-  font-size: 0.9rem;
-  color: var(--accent);
-  border: 1px solid var(--border-medium);
-}
+
 
 /* ===== CONTACT INFO ===== */
 .contact-list li {
@@ -658,8 +644,8 @@ button:hover,
 
 /* ===== EXPERIENCE ITEMS ===== */
 .experience-item {
-  margin-bottom: var(--space-lg) !important;
-  padding: var(--space-md) 0 !important;
+  margin-bottom: var(--space-md) !important;
+  padding: var(--space-sm) 0 !important;
   border-bottom: 1px solid var(--border-light) !important;
 }
 
@@ -681,8 +667,8 @@ button:hover,
 
 /* ===== ACHIEVEMENT LIST ===== */
 .achievement-list {
-  margin: var(--space-sm) 0 0 0 !important;
-  padding-left: var(--space-lg) !important;
+  margin: var(--space-xs) 0 0 0 !important;
+  padding-left: var(--space-md) !important;
 }
 
 .achievement-list li {
@@ -891,5 +877,55 @@ button:hover,
   #download-pdf {
     padding: var(--space-sm) var(--space-md);
     font-size: 0.95rem;
+  }
+}
+
+/* ===== PRINT & PDF OPTIMIZATION ===== */
+@media print {
+  .resume-preview {
+    max-width: 210mm;
+    padding: 8mm;
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+  }
+  
+  .resume-preview header {
+    margin-bottom: 6mm;
+    padding-bottom: 3mm;
+  }
+  
+  .preview-content {
+    gap: 6mm;
+    margin-top: 6mm;
+  }
+  
+  .resume-preview section {
+    margin-bottom: 4mm;
+  }
+  
+  .card-heading {
+    margin-bottom: 2mm;
+    padding-bottom: 1mm;
+  }
+  
+  .resume-preview li {
+    margin-bottom: 1.5mm;
+    padding: 0.5mm 0;
+  }
+  
+  .experience-item {
+    margin-bottom: 4mm !important;
+  }
+  
+  .achievement-list {
+    margin: 2mm 0 0 0 !important;
+    padding-left: 4mm !important;
+  }
+  
+  .achievement-list li {
+    margin-bottom: 1mm !important;
+    padding: 0.5mm 0 !important;
   }
 }
